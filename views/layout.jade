@@ -1,0 +1,24 @@
+doctype 5
+html
+  head
+    script(src='/js/lib/Modernizr.js')
+    title= title
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/custom-font.css')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Ceviche+One')
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    .container-fluid
+      .row-fluid
+        .span4
+        .span4.main
+          h1.logo
+            img(src="/img/yak.png")
+            span.headline &nbsp;Yakity Yak Yak
+          .row-fluid.content
+            block content
+        .span4
+    script(src="/js/lib/require.js", data-main="/js/main")
