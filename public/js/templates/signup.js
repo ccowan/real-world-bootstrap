@@ -4,7 +4,7 @@ attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow |
 var buf = [];
 with (locals || {}) {
 var interp;
-buf.push('<div class="span12"><form><h4>New User? Get Started Now</h4><div class="controls"><input type="text" name="name" placeholder="Full Name" class="span12"/></div><div class="controls"><input type="text" name="username" placeholder="Username" class="span12"/></div><div class="controls"><input type="text" name="email" placeholder="Email Address" class="span12"/></div><div class="controls"><input type="text" name="password" placeholder="Password" class="span12"/></div><div class="controls"><button class="pull-right btn btn-warning">Sign Up Now</button></div><div class="clearfix"></div></form></div>');
+buf.push('<div class="span12"><form><h4>New User? Get Started Now</h4><div class="control-group"><input type="text" name="name" placeholder="Full Name" class="span12"/></div><div class="control-group"><input type="text" name="username" placeholder="Username" class="span12"/></div><div class="control-group"><input type="text" name="email" placeholder="Email Address" class="span12"/></div><div class="control-group"><input type="password" name="password" placeholder="Password" class="span12"/></div><div class="control-group"><button class="pull-right btn btn-warning">Sign Up Now</button></div><div class="clearfix"></div></form></div>');
 }
 return buf.join("");
 };

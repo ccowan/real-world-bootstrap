@@ -6,10 +6,10 @@ var uuid = require('node-uuid');
 var passport = require('../../../lib/passport');
 
 var model = schemajs.create({
-  username: { type: 'alphanum', filters: ['trim'], required: true },
-  email: { type: 'email', filters: ['trim'], required: true },
-  name: { type: 'string', filters: ['trim'], required: true },
-  password: { type: 'string', filters: ['trim'], required: true }
+  username: { type: 'alphanum', filters: ['trim'], required: true, error: "Username should only contain leters and numbers" },
+  email: { type: 'email', filters: ['trim'], required: true, error: "Email is not valid" },
+  name: { type: 'string', filters: ['trim'], required: true, error: "Name is required" },
+  password: { type: 'string', filters: ['trim'], required: true, error: "Password is required" }
 });
 
 exports.mount = function (app) {
@@ -49,7 +49,7 @@ exports.signup = function (req, res, next) {
   tasks.push(function (done) {
     redis.get('user:'+user.data.username, function (err, id) {
       if (err) return done(err);
-      if (id) return done(new Error('User already exists')); 
+      if (id) return done({username:'Username already exists'}); 
       done(null, true);
     });
   });
@@ -58,7 +58,7 @@ exports.signup = function (req, res, next) {
   tasks.push(function (done) {
     redis.sismember('registered-emails', user.data.email, function (err, resp) {
       if (err) return done(err);
-      if (resp === 1) return done(new Error('Email already registered'));
+      if (resp === 1) return done({ email: 'Email already registered' });
       done();
     });
   });
@@ -78,7 +78,9 @@ exports.signup = function (req, res, next) {
   });
 
   async.series(tasks, function (err, results) {
-    if (err) return next(err);
+    if (err) {
+      return res.send({ error: err.message }, 400);
+    }
     req.login(user.data, function (err) {
       if (err) return next(err);
       res.send(user.data, 201);

@@ -25,9 +25,23 @@ define(function (require) {
       }
 
       // Save the user
+      var self = this;
       this.model.save(user, {
         success: function (model) {
           vent.trigger('navigate', '');
+        },
+        error: function (model, resp) {
+          var data = JSON.parse(resp.responseText);
+          var fields = _.keys(data);
+          var errors = _.values(data);
+          var partial = $('<div class="alert alert-error"></div>');
+          _.each(errors, function (error) {
+            partial.append('<div>'+error+'</div>');
+          });
+          _.each(fields, function (field) {
+            self.$el.find('[name='+field+']').parent().addClass('error');
+          });
+          self.$el.find('form').before(partial); 
         }
       });
     }
