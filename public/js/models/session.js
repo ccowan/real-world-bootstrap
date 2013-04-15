@@ -4,29 +4,34 @@ define(function (require) {
   var Session = Backbone.Model.extend({
 
     urlRoot: '/api/v1/session',
-    idAttribute: 'username',
 
-    login: function (creds) {
+    login: function (creds, done) {
+      creds.id = creds.username;
       this.save(creds, {
-        success: function () { }
-      });
-    },
-
-    logout: function () {
-      var self = this;
-      this.destory({
-        success: function (model, resp) {
-          model.clear();
-          model.id = null;
+        success: function (model) {
+          done(null, model);
+        },
+        error: function (xhr) {
+          done(new Error());
         }
       });
     },
 
-    auth: function (callback) {
+    logout: function (done) {
+      var self = this;
+      this.destroy({
+        wait: true,
+        success: function (model, resp) {
+          model.clear();
+          model.id = null;
+          done();
+        }
+      });
+    },
+
+    auth: function (done) {
       this.fetch({
-        success: function (model) {
-          callback(null, model);
-        },
+        success: done,
         error: function () {
           vent.trigger('navigate', '/signup');
         }

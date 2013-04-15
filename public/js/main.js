@@ -8,7 +8,8 @@ require.config({
     'backbone.babysitter': 'lib/backbone.babysitter.min',
     'backbone.wreqr': 'lib/backbone.wreqr.min',
     'jquery': 'lib/jquery',
-    'vent': 'lib/vent'
+    'vent': 'lib/vent',
+    'runtime': 'templates/runtime'
   }
 });
 

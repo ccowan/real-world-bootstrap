@@ -1,21 +1,19 @@
 var config = {
-  jaded: {
-    app: {
-      expand: true,
-      cwd: 'views',
-      src: ['**/*.jade'],
-      dest: 'public/js/templates',
+  jade: {
+    amd: {
+      files: {
+        'public/js/templates/': ['views/**/*.jade']
+      },
       options: {
-        amd: true,
-        rivets: false,
-        development: true
+        wrap: 'amd',
+        basePath: 'views/'
       }
     }
   },
   watch: {
     app: {
       files: ['views/**/*.jade'],
-      tasks: ['jaded:app'],
+      tasks: ['jade:amd'],
       options: {
         nospawn: true
       }
@@ -27,6 +25,6 @@ var config = {
 module.exports = function (grunt) {
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-jaded');
-  grunt.registerTask('default', ['jaded']);
+  grunt.loadNpmTasks('grunt-jade');
+  grunt.registerTask('default', ['jade:amd']);
 };
