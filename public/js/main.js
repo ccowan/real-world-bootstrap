@@ -3,7 +3,7 @@ require.config({
     'backbone': 'lib/backbone',
     'marionette': 'lib/backbone.marionette.min',
     'bootstrap': 'lib/bootstrap',
-    'moment': 'lib/moment',
+    'moment': 'lib/moment.min',
     'underscore': 'lib/underscore',
     'backbone.babysitter': 'lib/backbone.babysitter.min',
     'backbone.wreqr': 'lib/backbone.wreqr.min',

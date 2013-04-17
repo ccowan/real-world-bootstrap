@@ -4,9 +4,9 @@ attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow |
 var buf = [];
 with (locals || {}) {
 var interp;
-buf.push('<textarea');
-buf.push(attrs({ 'name':(status) }, {"name":true}));
-buf.push('></textarea>');
+buf.push('<div class="row-fluid"><div class="span1"><div class="avatar"><img');
+buf.push(attrs({ 'src':(avatar) }, {"src":true}));
+buf.push('/></div></div><div class="span11"><form><div><textarea name="post" class="span12"></textarea></div><div><button class="btn">Post </button></div></form></div></div>');
 }
 return buf.join("");
 };

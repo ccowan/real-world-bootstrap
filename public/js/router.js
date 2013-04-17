@@ -1,5 +1,4 @@
 define(function (require) {
-  var session = require('models/session');
   var home = require('controllers/home');
 
   return Backbone.Router.extend({

@@ -22,6 +22,13 @@ body, html {
   margin-top: 40px;
 }
 
+.avatar {
+  img {
+    border: 1px solid #999;
+  }
+}
+
+
 .logo {
   font-size: 50px;
   img {
@@ -46,8 +53,66 @@ body, html {
   .name {
     margin-left: 50px;
   }
+  .avatar {
+    width: 40px;
+  }
 }
 
 h1,h2,h3,h4,h5,h6 {
   font-weight: 400;
+}
+
+#nav {
+  border-right: 1px solid #DDD;
+  ul {
+    list-style: none;
+    margin: 0;
+    li {
+      i { display: none; }
+      &:hover {
+        background-color: lighten(@primary, 70); 
+      }
+      &.active {
+        i { display: inline-block; margin-top: 3px;  }
+        color: #FFF;
+        background-color: @primary;
+        a { color: #FFF; }
+      }
+      a {
+        color: #999;
+      }
+      border-top: 1px solid #DDD;
+      padding: 10px 0 10px 10px;
+      display: block;
+    }
+  }
+}
+
+#feed {
+  h3 {
+    background-color: #CCC;
+    font-size: 16px;
+    color: #FFF;
+    line-height: 12px;
+    padding: 10px;
+  }
+}
+
+#posts {
+  .post {
+    border-bottom: 1px solid #DDD;
+    padding: 20px 0;
+    .body {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .date {
+      font-size: 12px;
+      color: #999;
+    }
+  }
 }

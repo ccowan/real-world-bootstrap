@@ -36,6 +36,7 @@ if ('development' == app.get('env')) {
 }
 
 require('./routes/api/v1/session').mount(app);
+require('./routes/api/v1/posts').mount(app);
 require('./routes/api/v1/users').mount(app);
 app.get('*', routes.index);
 

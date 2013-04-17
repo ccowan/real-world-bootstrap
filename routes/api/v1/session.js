@@ -1,10 +1,12 @@
 var async = require('async');
+var transform = require('../../../lib/transformUser'); 
 var redis = require('../../../lib/redis');
 var schemajs = require('schemajs');
 var bcrypt = require('bcrypt');
 var uuid = require('node-uuid');
 var passport = require('../../../lib/passport');
 var crypto = require('crypto');
+var moment = require('moment');
 
 var model = schemajs.create({
   username: { type: 'alphanum', filters: ['trim'], required: true, error: "Username should only contain leters and numbers" },
@@ -12,16 +14,6 @@ var model = schemajs.create({
   name: { type: 'string', filters: ['trim'], required: true, error: "Name is required" },
   password: { type: 'string', filters: ['trim'], required: true, error: "Password is required" }
 });
-
-var transform = function (user) {
-  if (!user.avatar) {
-    var md5 = crypto.createHash('md5');
-    md5.update(user.email);
-    var hash = md5.digest('hex');
-    user.avatar = "http://www.gravatar.com/avatar/"+hash+"?s=40&d=mm";
-  }
-  return user;
-};
 
 exports.mount = function (app) {
   app.post('/api/v1/session', exports.signup);
@@ -55,6 +47,7 @@ exports.signup = function (req, res, next) {
   };
 
   user.data.id = id;
+  user.data.createdOn = moment.utc().format();
 
   // Check for existing users
   tasks.push(function (done) {

@@ -16,7 +16,8 @@
     "connect-redis": "~1.4.5",
     "schemajs": "~0.1.10",
     "async": "~0.2.7",
-    "node-uuid": "~1.4.0"
+    "node-uuid": "~1.4.0",
+    "moment": "~2.0.0"
   },
   "volo": {
     "baseDir": "public/js/lib",

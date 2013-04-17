@@ -1,0 +1,10 @@
+.span1
+  .avatar
+    img(src=user.avatar)
+.span11
+  .row-fluid
+    .span12
+      .name #{user.name} (#{user.username})
+      .body= body
+      .date #{moment(date).calendar()}
+    

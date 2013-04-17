@@ -44,6 +44,9 @@ html {
 #content {
   margin-top: 40px;
 }
+.avatar img {
+  border: 1px solid #999;
+}
 .logo {
   font-size: 50px;
 }
@@ -68,6 +71,9 @@ html {
 #dashboard .name {
   margin-left: 50px;
 }
+#dashboard .avatar {
+  width: 40px;
+}
 h1,
 h2,
 h3,
@@ -75,4 +81,59 @@ h4,
 h5,
 h6 {
   font-weight: 400;
+}
+#nav {
+  border-right: 1px solid #DDD;
+}
+#nav ul {
+  list-style: none;
+  margin: 0;
+}
+#nav ul li {
+  border-top: 1px solid #DDD;
+  padding: 10px 0 10px 10px;
+  display: block;
+}
+#nav ul li i {
+  display: none;
+}
+#nav ul li:hover {
+  background-color: #faf3ed;
+}
+#nav ul li.active {
+  color: #FFF;
+  background-color: #633f1f;
+}
+#nav ul li.active i {
+  display: inline-block;
+  margin-top: 3px;
+}
+#nav ul li.active a {
+  color: #FFF;
+}
+#nav ul li a {
+  color: #999;
+}
+#feed h3 {
+  background-color: #CCC;
+  font-size: 16px;
+  color: #FFF;
+  line-height: 12px;
+  padding: 10px;
+}
+#posts .post {
+  border-bottom: 1px solid #DDD;
+  padding: 20px 0;
+}
+#posts .post .body {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+#posts .post .name {
+  font-size: 14px;
+  font-weight: bold;
+}
+#posts .post .date {
+  font-size: 12px;
+  color: #999;
 }
