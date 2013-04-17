@@ -1,4 +1,14 @@
 var config = {
+  less: {
+    development: {
+      options: {
+        paths: ['public/css']
+      },
+      files: {
+        "public/css/style.css": "public/css/style.less"
+      }
+    }
+  },
   jade: {
     amd: {
       files: {
@@ -12,8 +22,8 @@ var config = {
   },
   watch: {
     app: {
-      files: ['views/**/*.jade'],
-      tasks: ['jade:amd'],
+      files: ['views/**/*.jade', 'public/css/style.less'],
+      tasks: ['jade:amd', 'less:development'],
       options: {
         nospawn: true
       }
@@ -25,6 +35,7 @@ var config = {
 module.exports = function (grunt) {
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-jade');
-  grunt.registerTask('default', ['jade:amd']);
+  grunt.registerTask('default', ['jade:amd', "less:development"]);
 };

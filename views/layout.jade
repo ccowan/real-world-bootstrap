@@ -11,14 +11,15 @@ html
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Ceviche+One')
     link(rel='stylesheet', href='/css/style.css')
   body
-    .container-fluid
-      .row-fluid
-        .span4
-        .span4.main
-          h1.logo
-            img(src="/img/yak.png")
-            span.headline &nbsp;Yakity Yak Yak
-          .content
-            block content
-        .span4
+    .navigation
+      .container
+        .row-fluid
+          #dashboard.pull-right
+          .span6
+            h1.logo
+              img(src="/img/yak.png")
+              span.headline &nbsp;Yakity Yak Yak
+    .container
+      #content
+        block content
     script(src="/js/lib/require.js", data-main="/js/main")

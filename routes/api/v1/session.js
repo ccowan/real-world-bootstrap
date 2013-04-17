@@ -4,6 +4,7 @@ var schemajs = require('schemajs');
 var bcrypt = require('bcrypt');
 var uuid = require('node-uuid');
 var passport = require('../../../lib/passport');
+var crypto = require('crypto');
 
 var model = schemajs.create({
   username: { type: 'alphanum', filters: ['trim'], required: true, error: "Username should only contain leters and numbers" },
@@ -11,6 +12,16 @@ var model = schemajs.create({
   name: { type: 'string', filters: ['trim'], required: true, error: "Name is required" },
   password: { type: 'string', filters: ['trim'], required: true, error: "Password is required" }
 });
+
+var transform = function (user) {
+  if (!user.avatar) {
+    var md5 = crypto.createHash('md5');
+    md5.update(user.email);
+    var hash = md5.digest('hex');
+    user.avatar = "http://www.gravatar.com/avatar/"+hash+"?s=40&d=mm";
+  }
+  return user;
+};
 
 exports.mount = function (app) {
   app.post('/api/v1/session', exports.signup);
@@ -22,11 +33,11 @@ exports.mount = function (app) {
 
 exports.index = function (req, res, next) {
   if (!req.user) return res.send({ error: "You shall not pass" }, 403);
-  res.send(req.user, 200);
+  res.send(transform(req.user), 200);
 }
 
 exports.login = function (req, res, next) {
-  res.send(req.user, 200);
+  res.send(transform(req.user), 200);
 }
 
 exports.logout = function (req, res, next) {
@@ -49,7 +60,7 @@ exports.signup = function (req, res, next) {
   tasks.push(function (done) {
     redis.get('user:'+user.data.username, function (err, id) {
       if (err) return done(err);
-      if (id) return done({username:'Username already exists'}); 
+      if (id) return done({ username: 'Username already exists' }); 
       done(null, true);
     });
   });
@@ -79,7 +90,7 @@ exports.signup = function (req, res, next) {
 
   async.series(tasks, function (err, results) {
     if (err) {
-      return res.send({ error: err.message }, 400);
+      return res.send(err, 400);
     }
     req.login(user.data, function (err) {
       if (err) return next(err);

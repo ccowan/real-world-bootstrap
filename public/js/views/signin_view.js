@@ -1,7 +1,7 @@
 define(function (require) {
   var Marionette = require('marionette');
   var template = require('templates/signin');
-  var vent = require('vent');
+  var App = require('app');
 
   return Marionette.ItemView.extend({
     template: template,
@@ -28,7 +28,7 @@ define(function (require) {
           self.$el.find('form').before('<div class="alert alert-error">The username or password you supplied is not valid.</div>');
           return;
         }
-        vent.trigger('navigate', '/');
+        App.vent.trigger('navigate', '/');
       });
     }
 

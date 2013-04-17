@@ -28,8 +28,11 @@
 body,
 html {
   font-family: 'Open Sans', sans-serif;
-  background-color: #633f1f;
   font-weight: 400;
+}
+.navigation {
+  border-bottom: 10px solid #633f1f;
+  background: #FFF;
 }
 .main {
   background: #FFF;
@@ -38,26 +41,32 @@ html {
   border-radius: 5px;
   padding: 10px 20px;
 }
-.container-fluid {
+#content {
   margin-top: 40px;
 }
 .logo {
   font-size: 50px;
-  text-align: center;
-  padding-bottom: 20px;
 }
 .logo img {
-  margin-top: -50px;
-  width: 100px;
+  width: 90px;
+  position: absolute;
+  top: -10px;
 }
 .logo span.headline {
   font-family: 'Ceviche One', cursive;
   font-size: 1.2em;
   color: #633f1f;
+  margin-left: 90px;
 }
 .icon-brain,
 .icon-brain-dump {
   color: #F99;
+}
+#dashboard {
+  padding-top: 10px;
+}
+#dashboard .name {
+  margin-left: 50px;
 }
 h1,
 h2,

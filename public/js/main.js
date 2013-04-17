@@ -13,33 +13,10 @@ require.config({
   }
 });
 
-require(['router', 'models/session', 'backbone', 'vent'], function (Router, session, Backbone, vent) {
-
-  // Initalize the Router
-  var router = new Router();
-
-  // Setup an event to trigger the navigation
-  vent.on("navigate", function(url) {
-    Backbone.history.navigate(url, {
-      trigger: true
-    });
+require(['app', 'router'], function (App, Router) {
+  // Intialize the routing
+  App.addInitializer(function (options) {
+    var router = new Router();
   });
-
-  // Start the Backbone Push History
-  Backbone.history.start({
-    pushState: Modernizr.history,
-    silent: true
-  });
-
-  // This will correct thing for IE
-  if (!Modernizr.history) {
-    rootLength = Backbone.history.options.root.length;
-    fragment = window.location.pathname.substr(rootLength);
-    return Backbone.history.navigate(fragment, {
-      trigger: true
-    });
-  } else {
-    return Backbone.history.loadUrl(Backbone.history.getFragment());
-  } 
-  
+  App.start();
 });

@@ -1,6 +1,7 @@
 define(function (require) {
   var Backbone = require('backbone');
-  var vent = require('vent');
+  var App = require('app');
+
   var Session = Backbone.Model.extend({
 
     urlRoot: '/api/v1/session',
@@ -9,6 +10,7 @@ define(function (require) {
       creds.id = creds.username;
       this.save(creds, {
         success: function (model) {
+          App.vent.trigger('login', model);
           done(null, model);
         },
         error: function (xhr) {
@@ -22,6 +24,7 @@ define(function (require) {
       this.destroy({
         wait: true,
         success: function (model, resp) {
+          App.vent.trigger('logout', false);
           model.clear();
           model.id = null;
           done();
@@ -31,9 +34,12 @@ define(function (require) {
 
     auth: function (done) {
       this.fetch({
-        success: done,
+        success: function (model) {
+          App.vent.trigger('login', model);
+          done(null, model);
+        },
         error: function () {
-          vent.trigger('navigate', '/signup');
+          App.vent.trigger('navigate', '/signup');
         }
       });
     }

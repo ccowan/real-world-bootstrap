@@ -2,7 +2,7 @@ define(function (require) {
   var Marionette = require('marionette');
   var _ = require('underscore');
   var template = require('templates/signup');
-  var vent = require('vent');
+  var App = require('app');
 
   return Marionette.ItemView.extend({
     template: template,
@@ -28,7 +28,8 @@ define(function (require) {
       var self = this;
       this.model.save(user, {
         success: function (model) {
-          vent.trigger('navigate', '');
+          App.vent.trigger('login', model);
+          App.vent.trigger('navigate', '');
         },
         error: function (model, resp) {
           var data = JSON.parse(resp.responseText);

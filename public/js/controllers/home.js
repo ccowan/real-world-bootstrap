@@ -1,24 +1,24 @@
 define(function (require) {
   var session = require('models/session');
-  var Marionette = require('marionette');
-  var stage = new Marionette.Region({ el: $('.content') });
-  var vent = require('vent');
+  var App = require('app');
   var SignupLayout = require('layouts/signup');
+  var HomeLayout = require('layouts/home');
 
   return {
     index: function () {
       session.auth(function (user) {
-        console.log('home');
+        var layout = new HomeLayout();
+        App.content.show(layout);
       });
     },
     signup: function () {
       var layout = new SignupLayout({ model: session });
-      stage.show(layout);
+      App.content.show(layout);
     },
     signout: function () {
       session.auth(function (user) {
         session.logout(function () {
-          vent.trigger('navigate', '/');
+          App.vent.trigger('navigate', '/');
         });
       });
     }
