@@ -29,7 +29,7 @@ define(function (require) {
       this.model.save(user, {
         success: function (model) {
           App.vent.trigger('login', model);
-          App.vent.trigger('navigate', '');
+          App.vent.trigger('navigate', '/');
         },
         error: function (model, resp) {
           var data = JSON.parse(resp.responseText);

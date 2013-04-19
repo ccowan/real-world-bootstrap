@@ -99,10 +99,21 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #posts {
+  .body {
+    &.empty {
+      text-align: center;
+      h2 {
+        font-size: 22px;
+      }
+    }
+  }
   .post {
     border-bottom: 1px solid #DDD;
     padding: 20px 0;
     .body {
+      &.empty {
+        text-align: center;
+      }
       font-size: 18px;
       margin-bottom: 10px;
     }

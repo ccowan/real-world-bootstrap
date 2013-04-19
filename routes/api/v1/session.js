@@ -87,7 +87,7 @@ exports.signup = function (req, res, next) {
     }
     req.login(user.data, function (err) {
       if (err) return next(err);
-      res.send(user.data, 201);
+      res.send(transform(user.data), 201);
     });
   });
 };

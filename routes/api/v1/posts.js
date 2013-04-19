@@ -67,6 +67,11 @@ exports.create = function (req, res, next) {
 
 exports.list = function (req, res, next) {
 
+  var page = req.query.page || 1;
+  var size = req.query.limit || 25;
+  var from = (page-1) * size;
+  var to = from + size - 1;
+
   // Resolve the key for the feed
   var key = "feed:everyone";
   if (req.params.view) {
@@ -85,7 +90,7 @@ exports.list = function (req, res, next) {
   
   // Get post ids
   tasks.push(function (callback) {
-    redis.lrange(key, 0, 50, callback);
+    redis.lrange(key, from, to, callback);
   });
 
   // Map post id to feeds

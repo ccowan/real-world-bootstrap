@@ -121,6 +121,12 @@ h6 {
   line-height: 12px;
   padding: 10px;
 }
+#posts .body.empty {
+  text-align: center;
+}
+#posts .body.empty h2 {
+  font-size: 22px;
+}
 #posts .post {
   border-bottom: 1px solid #DDD;
   padding: 20px 0;
@@ -128,6 +134,9 @@ h6 {
 #posts .post .body {
   font-size: 18px;
   margin-bottom: 10px;
+}
+#posts .post .body.empty {
+  text-align: center;
 }
 #posts .post .name {
   font-size: 14px;

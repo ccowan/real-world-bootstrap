@@ -21,6 +21,8 @@ define(function (require) {
           }
         });
         navView.on('navigate', function (url, title) {
+          feedView.page = 1;
+          feedView.reloading = false;
           options.collection.url = url;
           options.collection.fetch({
             reset: true
