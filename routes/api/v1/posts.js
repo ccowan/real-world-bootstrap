@@ -4,6 +4,7 @@ var async = require('async');
 var uuid = require('node-uuid');
 var moment = require('moment');
 
+// Set up the routes
 exports.mount = function (app) {
   app.post('/api/v1/posts', exports.create);
   app.get('/api/v1/posts/:view', exports.list);
@@ -37,6 +38,7 @@ exports.create = function (req, res, next) {
     res.send({ post: "You must send a post" }, 409);
   }
 
+  // Create the post object
   var post = {
     id: uuid.v1(),
     user: req.user.id,
@@ -44,17 +46,21 @@ exports.create = function (req, res, next) {
     date: moment.utc().format()
   };
 
+  // Insert the post and push it to the user and everyone feed
   var multi = redis.multi()
   multi.hmset('post:'+post.id, post);
   multi.lpush('feed:'+req.user.id, post.id);
   multi.lpush('feed:everyone', post.id);
   
+  // Push the post to the followers feeds
   req.user.followers.forEach(function (id) {
     multi.lpush('feed:'+id, post.id);  
   });
 
+  // Execute the Redis commands
   multi.exec(function (err, results) {
     if (err) return next(err);
+    // Process the mentions
     processMentions(post, function (err) {
       if (err) return next(err);
       post.user = req.user;

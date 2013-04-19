@@ -30,7 +30,7 @@ define(function (require) {
     App.dashboard.close();
   });
 
-  // Start Backbone.history upon initialization
+  // Start Backbone.history after the app is started initialization
   App.on('start', function () {
 
     // Start the Backbone Push History

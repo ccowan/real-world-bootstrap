@@ -1,3 +1,4 @@
+// This is your typical build step for Jade and Less... Nothing really special
 var config = {
   less: {
     development: {

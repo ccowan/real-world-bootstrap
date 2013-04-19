@@ -4,16 +4,22 @@ define(function (require) {
   var App = require('app');
 
   return Marionette.ItemView.extend({
+    // Set the template to our template function  
     template: template,
 
+    // Bind the scople of the object to the submit handler
     initialize: function (options) {
       _.bindAll(this, 'submit');
     },
 
+    // Attach the submit handler to the submit event
     events: {
       'submit form': 'submit'
     },
 
+    // When the user sign's in we need to use the session.login method to authenticate
+    // the user instead of creating a new one with save. If they are successful
+    // we will navigate to the home page. Other wise we need to display an error.
     submit: function (e) {
       e.preventDefault();
       var self = this;

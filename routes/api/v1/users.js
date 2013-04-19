@@ -1,3 +1,0 @@
-exports.mount = function (app) {
-};
-

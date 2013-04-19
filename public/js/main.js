@@ -1,3 +1,4 @@
+// Define the paths for all our libraries
 require.config({
   paths: {
     'backbone': 'lib/backbone',
@@ -13,10 +14,13 @@ require.config({
   }
 });
 
+// Require the App and router and kick things off.
 require(['app', 'router'], function (App, Router) {
   // Intialize the routing
   App.addInitializer(function (options) {
     var router = new Router();
   });
+
+  // Start the application
   App.start();
 });
